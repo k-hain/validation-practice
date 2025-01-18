@@ -3,8 +3,40 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Title</title>
+        <title>Form Validation Practice</title>
     </head>
     <body>
+        <div id="content-wrapper">
+            <form novalidate>
+                <div class="form-entry">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" />
+                    <span class="email-error"></span>
+                </div>
+                <div class="form-entry">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" />
+                    <span class="country-error"></span>
+                </div>
+                <div class="form-entry">
+                    <label for="postal-code">Postal Code</label>
+                    <input type="text" id="postal-code" />
+                    <span class="postal-code-error"></span>
+                </div>
+                <div class="form-entry">
+                    <label for="password">Password</label>
+                    <input type="text" id="password" />
+                    <span class="password-error"></span>
+                </div>
+                <div class="form-entry">
+                    <label for="password-confirmation">
+                        Password Confirmation
+                    </label>
+                    <input type="text" id="password-confirmation" />
+                    <span class="password-confirmation-error"></span>
+                </div>
+                <button class="submit-button">Submit</button>
+            </form>
+        </div>
     </body>
 </html>

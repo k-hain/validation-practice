@@ -106,3 +106,33 @@ button {
 button:hover {
     cursor: pointer;
 }
+
+#content-wrapper {
+    width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    padding: var(--padding-large);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-base);
+}
+
+.form-entry {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-tiny);
+}
+
+.submit-button {
+    background-color: var(--color-gray-medium);
+    display: flex;
+    padding: var(--padding-small);
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    justify-content: center;
+}
