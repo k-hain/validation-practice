@@ -107,6 +107,12 @@ button:hover {
     cursor: pointer;
 }
 
+input {
+    appearance: none;
+    width: 100%;
+    border: 2px solid var(--color-gray-medium);
+}
+
 #content-wrapper {
     width: 1280px;
     margin: 0 auto;
@@ -116,16 +122,24 @@ button:hover {
 }
 
 form {
+    width: 320px;
     padding: var(--padding-large);
     display: flex;
     flex-direction: column;
     gap: var(--padding-base);
 }
 
+label {
+    font-weight: bold;
+}
+
 .form-entry {
     display: flex;
     flex-direction: column;
-    gap: var(--padding-tiny);
+}
+
+.error {
+    padding: 0 var(--padding-small);
 }
 
 .submit-button {
@@ -135,4 +149,16 @@ form {
     border-radius: var(--border-radius);
     font-weight: bold;
     justify-content: center;
+}
+
+input:invalid {
+    border-color: red;
+}
+
+input:focus:invalid {
+    outline: none;
+}
+
+.error.active {
+    background-color: red;
 }
