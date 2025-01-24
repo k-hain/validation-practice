@@ -1,10 +1,11 @@
 import './style.css';
+import PubSub from 'pubsub-js';
 
 /* global document */
 
 const formEl = document.querySelector('form');
 const formInputs = [];
-
+const PASSWORD_UPDATE = 'PASSWORD UPDATE';
 
 class FormInput {   
     constructor(nameStr, nameClass) {
@@ -61,11 +62,40 @@ class FormInputPostalCode extends FormInput {
     }
 }
 
-const email = new FormInput('email address', 'email');
-const country = new FormInput('country', 'country');
-const postalCode = new FormInputPostalCode('postal code', 'postal-code');
-const password = new FormInput('password', 'password');
-formInputs.push(email, country, postalCode, password);
+class FormInputPassword extends FormInput {
+    validateInput() {
+        PubSub.publish(PASSWORD_UPDATE, this.inputEl.value);
+        super.validateInput();
+    }
+}
+
+class FormInputPasswordConfirmation extends FormInput {
+    constructor(nameStr, nameClass) {
+        super(nameStr, nameClass);
+        this.constraintList.push(
+            {
+                name: 'patternMismatch',
+                message: `Entered value needs to match the password.`,
+            }
+        );
+    }
+
+    updatePassword = (PASSWORD_UPDATE, newPassword) => {
+        this.inputEl.setAttribute('pattern', `${newPassword}`);
+        if (this.inputEl.value !== '') {
+            this.validateInput();
+        }; 
+    }
+    tokenUpdatePassword = PubSub.subscribe(PASSWORD_UPDATE, this.updatePassword);
+}
+
+const emailInput = new FormInput('email address', 'email');
+const countryInput = new FormInput('country', 'country');
+const postalCodeInput = new FormInputPostalCode('postal code', 'postal-code');
+const passwordInput = new FormInputPassword('password', 'password');
+const passwordConfirmationInput = new FormInputPasswordConfirmation('password confirmation', 'password-confirmation');
+
+formInputs.push(emailInput, countryInput, postalCodeInput, passwordInput, passwordConfirmationInput);
 
 formEl.addEventListener('submit', (event) => {
     formInputs.forEach((formInput) => {
